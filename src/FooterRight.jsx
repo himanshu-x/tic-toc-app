@@ -5,16 +5,24 @@ import MessageIcon from './icons/Message'
 import ShareIcon from './icons/Share'
 import './FooterRight.css'
 
-function VideoSidebar(props) {
+function VideoSidebar({ likes, shares, messages }) {
+    const [liked, setLiked] = useState(false)
 
-    const { likes, shares, messages } = props;
     return (
         <div className="footer-right">
             <div className="sidebar-icon">
-                <FavoriteBorderIcon
-                    style={{ width: '40px', height: '40px' }}
-                />
-                <p>{likes}</p>
+                {liked ? (
+                    <FavoriteIcon
+                        style={{ width: '40px', height: '40px' }}
+                        onClick={(e) => setLiked(false)}
+                    />
+                ) : (
+                    <FavoriteBorderIcon
+                        style={{ width: '40px', height: '40px' }}
+                        onClick={(e) => setLiked(true)}
+                    />
+                )}
+                <p>{liked ? likes + 1 : likes}</p>
             </div>
             <div className="sidebar-icon">
                 <MessageIcon style={{ width: '40px', height: '40px' }} />
